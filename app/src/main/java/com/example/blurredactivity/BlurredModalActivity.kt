@@ -22,6 +22,7 @@ class BlurredModalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blurred_modal)
 
+        findViewById<View>(android.R.id.content).visibility = View.GONE
         val blurredBackgroundUri: Uri? = intent.getParcelableExtra("capture_uri")
         AsyncBlurredCaptureLoader(this).execute(blurredBackgroundUri)
     }
@@ -29,6 +30,7 @@ class BlurredModalActivity : AppCompatActivity() {
     fun onLoadBlurredCapture(result: Drawable?) {
         val view: View = findViewById(android.R.id.content)
         view.background = result
+        findViewById<View>(android.R.id.content).visibility = View.VISIBLE
     }
 
     private class AsyncBlurredCaptureLoader(activity: BlurredModalActivity) : AsyncTask<Uri, Unit, Drawable>() {
